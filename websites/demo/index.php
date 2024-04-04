@@ -1,33 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo</title>
-    <style>
-        body {
-            display: grid;
-            place-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: sans-serif
-        }
-    </style>
-</head>
+$books = [
+    [
+        'name' => "Do Androids Dream of Electric Sheep",
+        'year' => 1968,
+        'author' => 'Philip K. Dick',
+        'purchaseUrl' => 'http://example.com'
+    ],
+    [
+        'name' => "The Langoliers",
+        'year' => 1990,
+        'author' => 'Andy Weir',
+        'purchaseUrl' => 'http://example.com'
+    ],
+];
 
-<body>
-    <?php
-    $name = "Dark Matter";
-    $read = true;
+function filter($items, $fn)
+{
+    $result = [];
 
-    if($read){
-        $message = "You have read $name";
-    }
-    ?>
-    <h1>
-        <?= $message ?>
-    </h1>
-</body>
+    foreach ($items as $item)
+        if ($fn($item))
+            $result[] = $item;
 
-</html>
+    return $result;
+}
+
+require 'index.view.php';

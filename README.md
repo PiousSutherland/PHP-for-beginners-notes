@@ -57,3 +57,112 @@ Quick way to echo a message:
 
 ----
 
+### 6. Arrays
+Define array
+```php
+$books = [
+	"Do Androids Dream of Electric Sheep",
+	"The Langoliers",
+	"Hail Mary"
+];
+```
+To render only
+```php
+echo "<li>{$book}™</li>";
+```
+
+Simple foreach
+```php
+<ul>
+	<?php foreach ($books as $book) : ?>
+		<li><?= $boook; ?></li>
+	<?php endforeach; ?>
+</ul>
+```	
+
+----
+
+### 7. Assosciative Arrays
+```php
+<?php
+$books = [
+	[
+		'name' => "Do Androids Dream of Electric Sheep",
+		'author' => 'Philip K. Dick',
+		'purchaseUrl' => 'http://example.com'
+	],
+	[
+		'name' => "The Langoliers",
+		'author' => 'Andy Weir',
+		'purchaseUrl' => 'http://example.com'
+	],
+];
+?>
+
+<?php foreach ($books as $book) : ?>
+	<ul>
+		<li><a href="<?= $book['purchaseUrl'] ?>"><?= $book['name']; ?></a></li>
+		<li>Author: <?= $book['author']; ?></li>
+	</ul>
+<?php endforeach; ?>
+```
+
+----
+
+### 8. Functions and Filters
+Filter using `if()`
+Defining functions:
+```php
+function filterByAuthor($books, $author = 'Andy Weir')
+{
+	$filteredBooks = [];
+	foreach($books as $book_
+	{
+		if($book['author'] === $author)
+			$filteredBooks[] = $book;
+	}
+	return $filteredBooks;
+}
+
+foreach(filterByAuthor($books) as $book { /* ... */ }
+```
+
+----
+
+### 9. Lamda functions
+You don't have to name a function; you can assign to variable directly.
+Meaning, you can do cool stuff like this:
+```php
+function filter($items, $fn)
+{
+	$result = [];
+
+	foreach ($items as $item)
+		if ($fn($item))
+			$result[] = $item;
+
+	return $result;
+}
+
+
+foreach (filter($books, function ($book) {
+	return $book['year'] >= 2000; // Returns boolean
+}) as $book) {}
+```
+
+Or, you can use `array_filter()` instead.
+
+----
+
+### 10. Separate Logic From the Template
+You can separate your HTML and core PHP into different files, then connect them using `require` or `include`
+
+----
+
+### 11. Technical Check-in #1 (With Quiz)
+![Quiz 1](images/quiz-1.png)
+
+----
+----
+
+## II. 
