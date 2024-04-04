@@ -165,4 +165,31 @@ You can separate your HTML and core PHP into different files, then connect them 
 ----
 ----
 
-## II. 
+## II. Dynamic Web Applications
+
+### 12. Page Links
+Took a Tailwind Dashboard starting page, the code can be found [here](https://laracasts.com/comments/28972)
+Basic changes.
+
+----
+
+### 13. PHP Partials
+Extracted the `heading`, `nav`, `banner` and `footer` sections as **partials**.
+
+----
+
+### 14. Superglobals and Current Page Styling
+There are SuperGlobals like `$_POST`, `$_GET`, `$_SESSION` and `$_SERVER`.
+You can extract a file like `functions.php`:
+```
+<?php
+function urlIs($value)
+{
+    return $_SERVER['REQUEST_URI'] == $value;
+}
+```
+Then call this file in every relevant file.
+
+----
+
+### 15. Make a PHP Router
