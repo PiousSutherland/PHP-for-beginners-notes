@@ -303,4 +303,57 @@ $db->query($query)->execute(['/*:*/id' => $id);
 ----
 ----
 
-### 21.
+## III. Notes Mini-Project
+
+### 21. Database Tables and Indexes
+Created `FK` and `ON DELETE CASCADE` for `notes` and `users` tables.
+
+----
+
+### 22. Render the Notes and Note Page
+Made the `notes` page showing a list of notes using a `user_id` and then displayed the entire note on a separate page `note` page.
+
+----
+
+### 23. Introduction to Authorization
+Made the program differentiate between user and note.
+`404` if the note doesn't exist and `403` if the note exists, but you're forbidden from seeing it.
+Only if `user_id` = 1, though, so no session / login yet.
+
+----
+
+### 24. Programming is Rewriting
+[!IMPORTANT]
+Crucial **refactoring** chapter
+
+You might want to do something like `fetchOrAbort()`, that uses a built-in function you own and adds onto that.
+It is possible.
+
+Example:
+```php
+public function query($query, $params = [])
+{
+	$stmt = $this->connection->prepare($query);
+	$stmt->execute($params);
+
+	return $stmt; // Returns PDO object
+	
+	// Fix:
+	// return $this;
+}
+```
+By returning `$this`, you can make your own `fetch()` method.
+* Problem with this: the `$stmt` variable is outside the scope.
+* Solution: return `$this` a few places as opposed to the `PDO` object; make a `private`/`protected` variable in-scope to use it.
+
+
+Sometimes, you might want to override the default so as NOT to give the user information
+```
+function authorize($authorized = false, $status = Response::FORBIDDEN)
+{
+    if (!$authorized)
+        abort($status);
+}
+```
+
+----
