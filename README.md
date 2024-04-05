@@ -1,3 +1,4 @@
+
 # PHP for Beginners Notes
 
 #### This follows the [PHP for beginners](https://laracasts.com/series/php-for-beginners-2023-edition/episodes/1) series on Laracasts.
@@ -193,3 +194,60 @@ Then call this file in every relevant file.
 ----
 
 ### 15. Make a PHP Router
+```php
+$uri =  parse_url($_SERVER['REQUEST_URI'])['path'];
+$uri = $uri == '/' ? '/' : rtrim($uri, '/');
+
+$routes = [
+    '/' => 'controllers/index.php',
+    '/about' => 'controllers/about.php',
+    '/contact' => 'controllers/contact.php'
+];
+
+function abort($code = 404)
+{
+    http_response_code($code);
+    $heading = $code;
+    require 'views/404.php';
+    die();
+}
+
+function routeToController()
+{
+    global $routes, $uri;
+
+    if (array_key_exists($uri, $routes))
+        require $routes[$uri];
+    else {
+        abort();
+    }
+}
+
+routeToController();
+```
+
+----
+
+### 16. Create a MySQL Database
+Created a simple database with one table, `posts`.
+
+----
+
+### 17. PDO First Steps
+Basic SQL `SELECT` query.
+`PDO` stands for 'PHP Database Object'
+
+Introduced classes, objects.
+
+Declare new instance of PDO:
+```php
+$dsn = "mysql:host=localhost;port=3306;dbname=learning_php;user=root;charset=utf8mb4";
+$pdo = new PDO($dsn);
+
+$stmt = $pdo->prepare("SELECT * FROM posts");
+$stmt->execute();
+
+$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+```
+
+----

@@ -1,6 +1,7 @@
 <?php
 
-$uri =  rtrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
+$uri =  parse_url($_SERVER['REQUEST_URI'])['path'];
+$uri = $uri == '/' ? '/' : rtrim($uri, '/');
 
 $routes = [
     '/' => 'controllers/index.php',
