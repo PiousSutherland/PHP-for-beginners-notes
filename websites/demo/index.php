@@ -3,13 +3,21 @@
 // 'functions.php' HAS to be at the top
 require 'functions.php';
 // require 'router.php';
+require 'Database.php';
 
-$dsn = "mysql:host=localhost;port=3306;dbname=learning_php;user=root;charset=utf8mb4";
-$pdo = new PDO($dsn);
+$db = new Database((require 'config.php')['database']);
 
-$stmt = $pdo->prepare("SELECT * FROM posts");
-$stmt->execute();
+$id = $_GET['id'];
+$query = "SELECT * FROM posts where id = ?";
 
-$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+$posts = $db->query($query, [$id])->fetchAll(PDO::FETCH_ASSOC);
 dd($posts);
+
+// Check if multidimensional
+if (isset($posts[0]) && is_array($posts[0])) {
+    foreach ($posts as $post) {
+        echo "<li>{$post['title']}</li>";
+    }
+} else {
+    echo "<li>{$posts['title']}</li>";
+}

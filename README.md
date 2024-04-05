@@ -251,3 +251,56 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ```
 
 ----
+
+### 18. Extract a PHP Database class
+Extracted functions into Database class with a `__construct` method that creates the initial connection
+
+----
+
+### 19. Environments and Configuration Flexibility
+`http_build_query()` can take a separator as a parameter.
+
+Meaning, you can take and assosciative array, pass it like so:
+```php
+http_build_query($assosciativeArray, '', ';');
+```
+And it will return `{$assosciativeArray[$key]}={$assosciativeArray[$value]};` for every key-vaule pair.
+
+Config example:
+```php
+<?php
+return [
+    'database' => [
+        'host' => 'localhost',
+        'port' => 3306,
+        'dbname' => 'learning_php',
+        'charset' => 'utf8mb4'
+    ],
+];
+```
+
+Calling example:
+```php
+$db = new Database((require 'config.php')['database']);
+```
+
+----
+
+### 20. SQL Injection Vulnerabilities Explained
+Sometimes a user can insert query inside the query string, like `example.com?id=1;drop table users`
+2 ways around this:
+1. Replace it with a `?`:
+```php
+$query = "select * from posts where id = ?";
+$db->query($query)->execute([$id]);
+```
+2. Declare it as a variable like `:id`
+```php
+$query = "select * from posts where id = :id";
+$db->query($query)->execute(['/*:*/id' => $id);
+```
+
+----
+----
+
+### 21.
