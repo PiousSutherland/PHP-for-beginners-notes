@@ -357,3 +357,48 @@ function authorize($authorized = false, $status = Response::FORBIDDEN)
 ```
 
 ----
+
+### 25. Intro to Forms and Request Methods
+#### General naming convention for route naming
+1. `/notes` would be all
+1. `/note` would be a specific unit
+1. `/notes/:note` would show a single note 
+1. `/notes/create` would let the user create a note
+
+The reason `note`-related files start like `note(s)-` is to keep them pretty close to one another alphabetically.
+
+#### Forms
+`GET` requests are considered ***idempotent***, meaning nothing is changed no matter how many times you run the operation.
+
+Refreshing a page runs a `GET` request, but `POST` usually only runs once you click a button.
+
+Check `$_SERVER` variable for `POST` request:
+```php
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+```
+
+You can access it using the `$_POST` variable.
+
+----
+
+### 26. Always Escape Untrusted Input
+Used `htmlspecialchars()` to sanitize data and prevent scripts from running.
+
+----
+
+### 27. Intro to Form Validation
+Basic validation
+
+----
+
+### 28. Extract a Simple Validator Class
+A `pure function` is not dependent on a state or value from the outside program.
+There is no external state being referenced or different class being deferred to.
+
+This means the function can be made `static`, and therefore called like so:
+```php
+Class::function();
+```
+
+----
+----
