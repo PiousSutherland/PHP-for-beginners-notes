@@ -402,3 +402,14 @@ Class::function();
 
 ----
 ----
+
+## IV. Project Organization
+
+### 29. Resourceful Naming Conventions
+`index` for displaying all, `show` for showing specific one(s) and `create`.
+
+----
+
+### 30. PHP Autoloading and Extraction
+> If you typically work along in your own code editor for each video, maybe for this lesson alone, don't do that.
+

@@ -1,7 +1,7 @@
 <?php
-require 'partials/head.php';
-require 'partials/nav.php';
-require 'partials/banner.php';
+require __DIR__ . '/../partials/head.php';
+require __DIR__ . '/../partials/nav.php';
+require __DIR__ . '/../partials/banner.php';
 ?>
 
 <main class="flex items-center justify-center">
@@ -10,7 +10,7 @@ require 'partials/banner.php';
             <label for="body">Create</label>
             <div>
                 <textarea name="body" id="body" cols="90" rows="10" placeholder="Put your note here!" required>
-                    <?= isset($_POST['body']) ? $_POST['body'] : ''?>
+                    <?= $_POST['body'] ?? '' ?>
                 </textarea>
 
                 <?= isset($errors['body']) && empty($errors['body']) ?? "<p class=\"text-red-500 text-xs\">{$errors['body']}</p>" ?>
@@ -21,4 +21,4 @@ require 'partials/banner.php';
     </div>
 </main>
 
-<?php require 'partials/footer.php' ?>
+<?php require __DIR__ . '/../partials/footer.php' ?>
