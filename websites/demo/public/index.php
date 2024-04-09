@@ -9,4 +9,10 @@ spl_autoload_register(function ($class) {
     require base_path(str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php');
 });
 
-require base_path('Core/router.php');
+$router = new \Core\Router();
+
+$routes = require base_path('routes.php');
+$uri =  parse_url($_SERVER['REQUEST_URI'])['path'];
+$uri = $uri == '/' ? '/' : rtrim($uri, '/');
+
+$route->route($uri);
