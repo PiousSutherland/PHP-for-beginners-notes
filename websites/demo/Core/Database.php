@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use PDO;
+
 class Database
 {
     protected $connection;
@@ -26,7 +30,7 @@ class Database
     {
         return $this->stmt->fetch();
     }
-    public function findAll()
+    public function get()
     {
         return $this->stmt->fetchAll();
     }

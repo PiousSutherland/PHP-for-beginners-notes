@@ -413,3 +413,30 @@ Class::function();
 ### 30. PHP Autoloading and Extraction
 > If you typically work along in your own code editor for each video, maybe for this lesson alone, don't do that.
 
+`extract()` turns an array (e.g., `['example' => 'Example text']`) into a collection of of variables (e.g., `$example = 'Example text`).
+
+Functions like `base_path()` and `view()` help loads with making the program more modular.
+
+Automatically instantiate classes as needed:
+```php
+spl_autoload_register(function ($class) {
+    require base_path($class . '.php');
+});
+```
+
+----
+
+### 31. Namespacing: What, Why, How?
+Namespaces are essentially like categorising.
+
+----
+
+### 32. Handle Multiple Request Methods From a Controller Action?
+`<a>` tags are idempotent, so they cannot be used to delete.
+
+Basic authentication before deleting.
+
+Used a hidden input to pass the value of the `note_id` to the server.
+
+----
+

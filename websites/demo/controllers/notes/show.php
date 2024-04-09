@@ -1,18 +1,41 @@
 <?php
 
-$db = new Database((require 'config.php')['database']);
+use Core\Database;
 
-$heading = "My Notes";
+$db = new Database((require base_path('config.php'))['database']);
+
 $currentUserId = 1;
 
-$note = $db->query(
-    'select * from notes where  id = :id',
-    [
-        // 'user' => 1, //$_SESSION['user_id'],
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $note = $db->query(
+        'select * from notes where  id = :id',
+        [
+            // 'user' => 1, //$_SESSION['user_id'],
+            'id' => $_GET['id']
+        ]
+    )->findOrFail();
+
+    authorize($note['user_id'] == $currentUserId);
+
+    $db->query('delete from notes where id = :id', [
         'id' => $_GET['id']
-    ]
-)->findOrFail();
+    ]);
 
-authorize($note['user_id'] == $currentUserId);
+    header('location: /notes');
+    exit();
+} else {
+    $note = $db->query(
+        'select * from notes where  id = :id',
+        [
+            // 'user' => 1, //$_SESSION['user_id'],
+            'id' => $_GET['id']
+        ]
+    )->findOrFail();
 
-require "views/notes/show.view.php";
+    authorize($note['user_id'] == $currentUserId);
+
+    require view("notes/show.view.php", [
+        'heading' => 'My Notes',
+        'note' => $note
+    ]);
+}
