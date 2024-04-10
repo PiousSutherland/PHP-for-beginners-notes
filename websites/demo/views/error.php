@@ -18,7 +18,7 @@ require 'partials/banner.php';
 
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-bold mb-6"><?= $errorMessages[$heading] ? $errorMessages[$heading] : 'Unknown error' ?></h1>
+        <h1 class="text-2xl font-bold mb-6"><?= $errorMessages[$heading] ?? 'Unknown error' ?></h1>
         
         <p class="t-4">
             <a href="/" class="text-blue-600 underline">Go back home.</a>

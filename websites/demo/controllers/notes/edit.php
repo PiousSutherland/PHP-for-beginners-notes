@@ -6,9 +6,8 @@ use Core\Database;
 $db = App::resolve(Database::class);
 
 $currentUserId = 1;
-
 $note = $db->query(
-    'select * from notes where  id = :id',
+    'select * from notes where id = :id',
     [
         // 'user' => 1, //$_SESSION['user_id'],
         'id' => $_GET['id']
@@ -17,7 +16,8 @@ $note = $db->query(
 
 authorize($note['user_id'] == $currentUserId);
 
-require view("notes/show.view.php", [
-    'heading' => 'My Notes',
+view('notes/edit.view.php', [
+    'heading' => 'Edit note',
+    'errors' => [],
     'note' => $note
 ]);

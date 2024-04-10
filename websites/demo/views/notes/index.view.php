@@ -1,7 +1,7 @@
 <?php
 view('partials/head.php');
 view('partials/nav.php');
-view('partials/banner.php');
+view('partials/banner.php', ['heading' => $heading]);
 ?>
 
 <main>

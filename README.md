@@ -441,3 +441,94 @@ Used a hidden input to pass the value of the `note_id` to the server.
 ----
 
 ### 33. Build a Better Router
+Essentially recreated part of the Laravel `Route` functionality as used in `web.php`.
+
+----
+
+### 34. One Request, One Controller
+All separate functionalities were moved into their own file.
+
+----
+
+### 35. Make Your First Service Container
+`Container.php` manages bindings and resolves dependencies:
+```
+<?php
+
+namespace Core;
+
+class Container
+{
+    protected $bindings = [];
+
+    public function bind($key, $resolver)
+    {
+        $this->bindings[$key] = $resolver;
+    }
+
+    public function resolve($key)
+    {
+        if (!array_key_exists($key, $this->bindings))
+            throw new \Exception('No matching binding found for {$key}.');
+
+        return call_user_func($this->bindings[$key]);
+    }
+}
+```
+
+`bootstrap.php` sets up the dependency injection container by binding classes and making them available globally:
+```
+<?php
+
+use Core\App;
+use Core\Container;
+use Core\Temp;
+
+$container = new Container();
+
+$container->bind('\Core\Temp', fn() => new Temp();
+
+App::setContainer($container);
+```
+
+`App.php` makes the container available:
+```
+<?php
+
+namespace Core;
+
+class App
+{
+    protected static $container;
+
+    public static function setContainer($container)
+    {
+        static::$container = $container;
+    }
+
+    public static function container()
+    {
+        return static::$container;
+    }
+
+    public static function bind($key, $resolver)
+    {
+        static::container()->bind($key, $resolver);
+    }
+
+    public static function resolve($key)
+    {
+        return static::container()->resolve($key);
+    }
+}
+```
+
+Now you call it using:
+```
+$temp = \Core\App::resolve(\Core\Temp::class);
+```
+
+----
+
+### 36. Updating With PATCH Requests
+Added `hidden inputs` to pass the Request to the server; there was validation and some authorization.
