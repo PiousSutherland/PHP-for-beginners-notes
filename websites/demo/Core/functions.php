@@ -37,3 +37,8 @@ function abort($code = Response::NOT_FOUND)
 
     die();
 }
+
+function login($user)
+{
+    $_SESSION['user'] = ['email' => $user['email']];
+}

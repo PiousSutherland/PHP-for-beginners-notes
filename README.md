@@ -587,3 +587,16 @@ class Middleware
 
 ----
 
+### 40. Manage Passwords Like This For The Remainder of Your Career
+**NEVER** store passwords as plaintext.
+
+In PHP, you can call a function `password_hash()` and choose the default, which probably is `BCRYPT`.
+
+----
+
+### 41. Log In and Log Out
+Same old validation, with a sessions `destroy()` function, that deleted all `$_SESSION` values.
+
+----
+----
+

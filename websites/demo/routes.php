@@ -4,6 +4,10 @@ $router->get('/', 'controllers/index.php');
 $router->get('/about', 'controllers/about.php');
 $router->get('/contact', 'controllers/contact.php');
 
+$router->get('/login', 'controllers/session/create.php')->only('guest');
+$router->post('/session', 'controllers/session/store.php')->only('guest');
+$router->post('/session', 'controllers/session/store.php')->only('guest');
+
 $router->get('/register', 'controllers/registration/create.php')->only('guest');
 $router->post('/register', 'controllers/registration/store.php');
 

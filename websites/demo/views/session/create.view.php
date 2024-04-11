@@ -1,7 +1,6 @@
 <?php
 view('partials/head.php');
 view('partials/nav.php');
-view('partials/banner.php', ['heading' => $heading]);
 ?>
 
 <main>
@@ -9,11 +8,10 @@ view('partials/banner.php', ['heading' => $heading]);
         <div class="w-full max-w-md space-y-8">
             <div>
                 <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Register for a new
-                    account</h2>
+                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Log in</h2>
             </div>
 
-            <form class="mt-8 space-y-6" action="/register" method="POST">
+            <form class="mt-8 space-y-6" action="/sessions" method="POST">
                 <div class="-space-y-px rounded-md shadow-sm">
                     <div>
                         <label for="email" class="sr-only">Email address</label>
@@ -28,7 +26,7 @@ view('partials/banner.php', ['heading' => $heading]);
 
                 <div>
                     <button type="submit" class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                        Register
+                        Log in
                     </button>
                 </div>
 
