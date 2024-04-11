@@ -13,6 +13,6 @@ class Validator
 
     public static function email($email)
     {
-        filter_var($email, FILTER_VALIDATE_EMAIL);
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 }

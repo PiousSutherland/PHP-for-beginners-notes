@@ -532,3 +532,58 @@ $temp = \Core\App::resolve(\Core\Temp::class);
 
 ### 36. Updating With PATCH Requests
 Added `hidden inputs` to pass the Request to the server; there was validation and some authorization.
+
+----
+
+### 37. PHP Sessions 101
+You have to `session_start()` in order to get session data.
+
+To get information about the session, among other things, you can run `php [-i/--info]`
+
+To get where the session data is being stored, run `sys_get_temp_dir()`.
+
+----
+
+### 38. Register a New Use.
+Used sessions and did validation where appropriate.
+
+----
+
+### 39. Introduction to Middleware
+> A middleware is sort of like a bridge that will take us to an initial request to the core of your application
+That bridge has the ability to do anything it wants; now, it wants to authorize the user.
+
+Middleware can be done if you `return $this` instance on your `Router`, then chain methods like `->only()`.
+
+In your `Middleware` class, you should 'register' / log / map your middleware classes.
+
+Having a `resolve()` method to take a value from the session makes your `route()` method look more readable.
+
+```php
+<?php
+
+namespace Core\Middleware;
+
+class Middleware
+{
+    public const MAP = [
+        'guest' => Guest::class,
+        'auth' => Auth::class
+    ];
+
+    public static function resolve($key)
+    {
+        if (!$key) return;
+
+        $middleware = Middleware::MAP[$key] ?? false;
+
+        if (!$middleware)
+            throw new \Exception("No matching middleware found for key $key");
+
+        (new $middleware)->handle();
+    }
+}
+```
+
+----
+

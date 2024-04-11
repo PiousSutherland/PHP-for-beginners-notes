@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 const BASE_PATH = __DIR__ . '/../';
 
 // Critical - leave at the top

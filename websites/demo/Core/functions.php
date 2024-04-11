@@ -33,8 +33,7 @@ function view($path, $attributes = [])
 function abort($code = Response::NOT_FOUND)
 {
     http_response_code($code);
-    $heading = $code;
-    view('error.php');
+    view('error.php', ['heading' => $code]);
 
     die();
 }
