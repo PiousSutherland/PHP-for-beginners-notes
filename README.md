@@ -664,3 +664,10 @@ Even better, create constants.
 
 ----
 
+### 45. Flash Old Form Data to the Session
+The problem with unsetting `$_SESSION` is not being able to display old data on page reload.
+You can create an `old()` function to do this for you.
+
+----
+
+### 46. Automatically Redirect Back Upon Failed Validation
