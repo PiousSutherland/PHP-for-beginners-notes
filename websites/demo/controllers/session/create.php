@@ -1,3 +1,3 @@
 <?php
 
-view('sessions/create.view.php', ['heading' => 'Log in']);
+view('session/create.view.php', ['heading' => 'Log in']);

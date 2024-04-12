@@ -10,7 +10,7 @@ $password = $_POST['password'];
 $errors = [];
 // Validation
 if (!$email || !$password) {
-    return view('sessions/create.view.php', [
+    return view('session/create.view.php', [
         'errors' => ['email' => 'You need to input values.']
     ]);
 } else if (!Validator::email($email)) {
@@ -19,7 +19,7 @@ if (!$email || !$password) {
 
 // Return
 if ($errors)
-    return view('sessions/create.view.php', ['errors' => $errors]);
+    return view('session/create.view.php', ['errors' => $errors]);
 
 // Check Credentials
 $db = App::resolve(Database::class);
@@ -30,12 +30,12 @@ $user = $db->query('select * from users where email = :email', [
 
 // Credentials did not match
 if (!$user) {
-    return view('sessions/create.view.php', [
+    return view('session/create.view.php', [
         'errors' => ['email' => 'Credentials could not be matched.']
     ]);
 }
 if (!password_verify($password, $user['password']))
-    return view('sessions/create.view.php', [
+    return view('session/create.view.php', [
         'errors' => ['email' => 'Credentials could not be matched.']
     ]);
 

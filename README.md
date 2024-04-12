@@ -597,6 +597,18 @@ In PHP, you can call a function `password_hash()` and choose the default, which 
 ### 41. Log In and Log Out
 Same old validation, with a sessions `destroy()` function, that deleted all `$_SESSION` values.
 
+Logging out can be done as follows:
+```
+function logout()
+{
+    $_SESSION = [];
+    session_destroy();
+
+    $params = session_get_cookie_params();
+    setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+}
+```
+
 ----
 ----
 
