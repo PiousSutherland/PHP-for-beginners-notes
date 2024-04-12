@@ -592,10 +592,14 @@ class Middleware
 
 In PHP, you can call a function `password_hash()` and choose the default, which probably is `BCRYPT`.
 
+You can use `password_verify()` to check the values in the database against the one supplied.
+
 ----
 
 ### 41. Log In and Log Out
-Same old validation, with a sessions `destroy()` function, that deleted all `$_SESSION` values.
+Same old validation, with a `sessions_destroy()` function, that deleted all `$_SESSION` values.
+
+When logging in, using 	`session_regenerate_id(true);` will prevent old sessions from being used maliciously.
 
 Logging out can be done as follows:
 ```
