@@ -45,7 +45,7 @@
                         <div class="ml-3">
                             <form action="/session" method="post">
                                 <input type="hidden" name="_REQUEST_METHOD" value="DELETE" />
-                                <button>Log Out</button>
+                                <button class="text-white">Log Out</button>
                             </form>
                         </div>
                     <?php endif; ?>

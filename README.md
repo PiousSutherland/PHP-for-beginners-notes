@@ -616,3 +616,51 @@ function logout()
 ----
 ----
 
+## VI. Refactoring Techinques
+
+### 42. Extract a Form Validation Object
+Created a new `Http/` directory for various webpage-specific logic, like controllers and .
+
+The reason the `Forms/` directory (used for validation) was not put in `Core/`, is because it really is separate from the core.
+It will be used specific to forms like `login`, not by programs / classes that handle payment processing, for example.
+
+----
+
+### 43. Extract an Authenticator Class
+> It should not be the responsibility of the `Authenticator` class (or any calss for that matter) to load `views`; 
+that should be done by the controllers.
+
+> Whenever you're in a situation where you have 2 pieces of code that are mostly the same, but slightly different, instead, see if you
+can make whatever changes necessary to make those pieces of code identical.
+
+Example:
+```
+if ((new LoginForm())->validate($email, $password))
+    return view('session/create.view.php', ['errors' => $form->errors()]);
+
+if ((new Authenticator())->attempt($email, $password)) {
+    return view('session/create.view.php', [
+        'errors' => ['email' => 'Credentials could not be matched.']
+    ]);
+};
+```
+
+The only difference between these two is the second is hard-coded.
+
+This could be a sign to append a new error to the `LoginForm`.
+
+----
+
+### 44. The PRG Pattern (and Session Flashing)
+***PRG: Post-Redirect-Get***
+
+Problem: on refresh or navigating back, the page that was `POST`-ed stays as a `POST`.
+You have to `redirect` and not `return view()`. 
+
+You can get around not being able to pass variables like `error` messages by using the `$_SESSION` variable.
+Using a key like `['_flash']`, especially with an underscore, is preferable in order to keep it separate from 
+potential keywords in the application / framework. `unset()`
+Even better, create constants.
+
+----
+

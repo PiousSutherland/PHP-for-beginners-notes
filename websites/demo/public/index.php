@@ -1,5 +1,7 @@
 <?php
 
+use Core\Session;
+
 session_start();
 
 const BASE_PATH = __DIR__ . '/../';
@@ -24,4 +26,6 @@ $uri = $uri == '/' ? '/' : rtrim($uri, '/');
 $method = $_POST['_REQUEST_METHOD'] ?? $_SERVER['REQUEST_METHOD'];
 
 $router->route($uri, $method);
+
+Session::unflash();
 /* End Route-based executions */
