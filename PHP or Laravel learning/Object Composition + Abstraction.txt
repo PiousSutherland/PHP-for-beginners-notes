@@ -1,0 +1,42 @@
+class Subscription
+{
+	// Various subscription fn's, like cancel(); create(); invoice()
+	prot. Gateway $gateway;
+	function __construct (Gateway $gateway)
+	{ 
+		return $this->gateway = $gateway 
+	}
+	function cancel() { 
+		// $this->gateway->functions()
+	}
+}
+// In the Subscription class above, i.s.o. using StripeGateway, implement abstraction 
+// This is done, because there may be other Billing Platforms used in the future.
+// The Subscription class does not care exactly what type of Billing it uses; just that it does
+
+interface Gateway
+{
+	public function findCustomer();
+	public function findSubscriptionByCustomer();
+}
+
+class StripeGateway implements Gateway
+{
+	// Handles subscription billing with 3rd party, Stripe
+	fn findCustomer(){}
+	fn findSubscriptionByCustomer(){}
+}
+
+class AnotherBillingGateway implements Gateway
+{
+	// Handles subscription billing with 3rd party, random
+	fn findCustomer(){}
+	fn findSubscriptionByCustomer(){}
+} 
+
+// new Subscription(new StripeGateway());
+// new Subscription(new AnotherBillingGateway());
+
+// Option 1: add Stripe billing methods directly into Subscription class, as non-public
+// Option 2: pull Stripe functions into BillableSubscription class, extend Subscription
+// Option 3: (above) Object composition + abstraction

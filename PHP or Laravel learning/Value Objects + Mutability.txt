@@ -1,0 +1,41 @@
+<?php
+
+// Value Object: Object defined according to its data 
+// (should only be used if it very clearly offers a benefit)
+// Mutable: internal state can be changed 
+
+// Value Objects avoid primitive obsession, are more readable
+// Helps with consistency if you perform checks (e.g. in __construct)
+// No setters, non-public vars, so immutablility possible
+
+
+class Age // Value Object
+{
+	private $age;
+	public function __construct($age){
+		if($age < 0 || $age > 120)
+			throw new InvalidArgumentException('Not realistic age of a human');
+		$this->age = $age;
+	}
+	public function increment()
+	{
+		return $this->age += 1; // Mutable
+		return new self($this->age + 1); // Immutable
+	}
+	public function get()
+	{
+		return $this->age;
+	}
+}
+
+function register(string $name, Age $age)
+{}
+
+$age = new Age(35);
+$age->increment();
+var_dump($age->get()); //36
+
+// Risk if Age->$age is public :
+// $age->age = 500; // Will bypass internal 'logic'/constructor
+
+register('John Doe', $age);
